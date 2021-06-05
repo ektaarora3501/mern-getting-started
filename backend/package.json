@@ -1,0 +1,23 @@
+{
+  "name": "mern-getting-started",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ektaarora3501/mern-getting-started.git"
+  },
+  "author": "Ekta Arora",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ektaarora3501/mern-getting-started/issues"
+  },
+  "homepage": "https://github.com/ektaarora3501/mern-getting-started#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
