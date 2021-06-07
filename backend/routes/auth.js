@@ -4,7 +4,6 @@ const authController = require('../controllers/authController');
 const router = Router();
 // To add middleware
 const auth = require('../middleware/auth');
-const { route } = require('./item');
 
 router.post('/register',authController.signup);
 router.post('login',authController.login);
