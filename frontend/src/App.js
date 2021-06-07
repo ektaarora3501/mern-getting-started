@@ -1,122 +1,36 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import {
-  TextField,
-  InputAdornment,
-  IconButton,
-  Grid,
-} from "@material-ui/core";
-import {
-  CloudUpload,
-  ArrowForwardIos,
-  ArrowBackIos,
-} from "@material-ui/icons/";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { incNumber, decNumber } from "./actions/index";
 
 const ImageUploader = (props) => {
-  const [imageFiles, setImageFiles] = React.useState([]);
-  const [imageFilesURLs, setImageFilesURLs] = React.useState([]);
-  const [currentImg, setCurrentImg] = React.useState(0);
-
-
+  const myState = useSelector((state) => state.changeNumber);
+  const dispatch = useDispatch();
   return (
-    <div>
-      <TextField
-        fullWidth={props.fullWidth}
-        variant="outlined"
-        InputProps={{
-          readOnly: true,
-          startAdornment: (
-            <InputAdornment position="start">
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={(event) => {
-                  setImageFiles(
-                    imageFiles.concat(Array.from(event.target.files))
-                  );
-
-                  Object.keys(event.target.files).map((key, value) => {
-                    setImageFilesURLs((imageFilesURLs) => [
-                      ...imageFilesURLs,
-                      URL.createObjectURL(event.target.files[key]),
-                    ]);
-                  });
-                }}
-              />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton>
-                <CloudUpload />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      {imageFiles.length !== 0 && (
-        <React.Fragment>
-          <Grid
-            container
-            spacing={2}
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
+    <div class="main-div">
+      <div class="container">
+        <h1> Increment/Decrement counter</h1>
+        <h4>using React and Redux</h4>
+        <div clasS="quantity">
+          <button
+            class="quantity_minus"
+            title="Decrement"
+            onClick={() => dispatch(decNumber())}
           >
-            <Grid
-              item
-              xs={2}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <IconButton
-                onClick={() => {
-                  currentImg === 0
-                    ? setCurrentImg(imageFilesURLs.length - 1)
-                    : setCurrentImg(currentImg - 1);
-                }}
-              >
-                <ArrowBackIos />
-              </IconButton>
-            </Grid>
-            <Grid
-              item
-              xs={8}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src={imageFilesURLs[currentImg]}
-                style={{ width: "100%", height: "auto" }}
-              />
-            </Grid>
-            <Grid
-              item
-              xs={2}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <IconButton
-                onClick={() => {
-                  currentImg === imageFilesURLs.length - 1
-                    ? setCurrentImg(0)
-                    : setCurrentImg(currentImg + 1);
-                }}
-              >
-                <ArrowForwardIos />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </React.Fragment>
-      )}
+            <span>-</span>
+          </button>
+          <input
+            name="quantity"
+            type="text "
+            class="quantity_input"
+            value={myState}
+          ></input>
+          <button class="quantity_plus" title="Increment " onClick={() => dispatch(incNumber())}>
+            <span>+</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
